@@ -11,6 +11,7 @@ import { app } from "../firebase.config";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 
+
 function Header() {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
