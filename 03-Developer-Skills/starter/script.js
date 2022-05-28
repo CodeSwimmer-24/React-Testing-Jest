@@ -180,7 +180,7 @@ const game = {
 const players = game.scored;
 
 for (const goals of Object.keys(game.scored)) {
-  console.log(`Goal ${goals} : ${players[goals]}`);
+  //   console.log(`Goal ${goals} : ${players[goals]}`);
 }
 
 // Answer 2
@@ -188,10 +188,140 @@ const teams = game.odds;
 let average = 0;
 for (const odd of Object.values(teams)) average += odd;
 average /= Object.values(teams).length;
-console.log(average);
+// console.log(average);
 
 // Answer 3
 for (const [team, odd] of Object.entries(game.odds)) {
   const teamStr = team === "x" ? "Draw" : game[team];
-  console.log(`Odds of Victory ${teamStr}: ${odd}`);
+  //   console.log(`Odds of Victory ${teamStr}: ${odd}`);
+}
+
+// SETS (UNIQUE VALUES)
+
+const orderSet = new Set(["Pasta", "Pizza", "Pizza", "Cook", "Pasta"]);
+
+// console.log(orderSet);
+// console.log(orderSet.size);
+// console.log(orderSet.has("Bred")); // To check true or false
+orderSet.add("Bred");
+orderSet.delete("Bred");
+// console.log(orderSet);
+
+const staff = [
+  "waiter",
+  "sheaf",
+  "washing",
+  "cooking",
+  "cleaner",
+  "waiter",
+  "sheaf",
+  "washing",
+  "cooking",
+  "cleaner",
+];
+
+const setStaff = [...new Set(staff)];
+// console.log(setStaff);
+
+// MAPS
+
+const rest = new Map();
+rest
+  .set("name", "Ashraf Biryani")
+  .set(1, "Topsia")
+  .set(2, "Park Circus")
+  .set("categories", ["Pasta", "Pizza", "Pizza", "Cook", "Pasta"])
+  .set("open", 11)
+  .set("close", 24)
+  .set(true, "We are open :)")
+  .set(false, "We are close :(");
+
+// console.log(rest.get("name"));
+// console.log(rest.get(true));
+// console.log(rest.get(1));
+
+const time = 21;
+
+// console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
+
+// console.log(rest);
+
+const question = new Map([
+  ["quesction", "What is the best programming lang in the world"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "JavaScript"],
+  ["correct", 3],
+  [true, "Your answer is right"],
+  [false, "Try again!"],
+]);
+
+// console.log(question);
+
+// Convert Objects in Map
+// const hourMap = new Map(Object.entries(openingHours))
+
+// Convert Map in Array
+// console.log([...question])
+
+for (const [key, value] of question) {
+  if (typeof key === "number");
+}
+
+const answer = Number(3);
+
+if (question.get("correct") === answer) {
+  //   console.log(question.get(true));
+} else console.log(question.get(false));
+// console.log([...question]);
+
+// Data STRUCTURE OVERVIEW
+// Coding Challenge #3
+
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+const gameEvents = new Map([
+  [17, "⚽️ GOAL"],
+  [36, "🔁 Substitution"],
+  [47, "⚽️ GOAL"],
+  [61, "🔁 Substitution"],
+  [64, "🔶 Yellow card"],
+  [69, "🔴 Red card"],
+  [70, "🔁 Substitution"],
+  [72, "🔁 Substitution"],
+  [76, "⚽️ GOAL"],
+  [80, "⚽️ GOAL"],
+  [92, "🔶 Yellow card"],
+]);
+
+const set = [...new Set(gameEvents.values())];
+console.log(set);
+
+for (const [key, value] of gameEvents) {
+  //   console.log(key, value);
+  gameEvents.delete(64);
+  console.log(key, value);
+}
+
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+for (const [key, values] of gameEvents) {
+  //   console.log(values);
+  if (key <= 45 && values === "⚽️ GOAL") {
+    console.log(`The ${values} is in 1st Half at ${key} min.`);
+  } else if (key >= 45 && values === "⚽️ GOAL") {
+    console.log(`The ${values} is in 2nd Half at ${key} min.`);
+  }
 }
