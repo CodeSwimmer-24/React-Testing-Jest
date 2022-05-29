@@ -325,3 +325,107 @@ for (const [key, values] of gameEvents) {
     console.log(`The ${values} is in 2nd Half at ${key} min.`);
   }
 }
+
+// Slice  Methods
+
+const airLine = "Air India";
+
+console.log(airLine.toLocaleLowerCase());
+console.log(airLine.toLocaleUpperCase());
+
+const passenger = " jOnAS \n";
+const passengerLower = passenger.toLocaleLowerCase();
+const passengerCorrect =
+  passenger[0].toLocaleUpperCase() + passenger.slice(1).toLocaleLowerCase();
+passenger.slice(3).toLocaleLowerCase();
+passenger.slice(4).toLocaleLowerCase();
+
+const perfectName = passenger.toLowerCase().trim();
+
+console.log(perfectName);
+
+// Replacing String
+
+const priceGB = "288,97$";
+const priceUs = priceGB.replace("$", "&").replace(",", ".");
+console.log(priceUs);
+
+const plane = "Arabic A3200nc";
+console.log(plane.includes("A320"));
+
+if (plane.startsWith("Arabic") && plane.endsWith("nc")) {
+  console.log("New family");
+}
+
+// SPLIT && JOIN
+
+console.log("Fahad Mahmood".split(" "));
+
+const [firstName, lastName] = "Fahad Mahmod".split(" ");
+
+const newName = ["Mr.", firstName, lastName.toUpperCase()].join(" ");
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(" ");
+  const namesUpper = [];
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(" "));
+};
+
+capitalizeName("fahad mahmood");
+capitalizeName("rashid mahmood");
+
+// Padding
+const message = "Go to gate 23!";
+console.log(message.padStart(25, "+"));
+console.log(message.padEnd(25, "+"));
+
+const makeCreaditCard = function (cardNumber) {
+  const n = " " + cardNumber;
+  const str = n.slice(-4);
+  return str.padStart(n.length, "*");
+};
+
+console.log(makeCreaditCard(1234567890123));
+
+// Repeat
+
+const message2 = "Bad weather... All Depature Deayed.... \n";
+
+console.log(message2.repeat(5));
+
+// Coding Challange 4
+
+const nameConvert = function (name) {
+  const n = name.split("_");
+  const upperCase = [];
+  for (const nam of n) {
+    // upperCase.push(nam[0].toUpperCase() + nam.slice(1));
+    upperCase.push(nam.replace(nam[0], nam[0].toUpperCase()));
+  }
+  console.log(upperCase.join(""));
+};
+
+nameConvert("fahad_mahmood");
+nameConvert("rashidoo_mahmood");
+
+const flights =
+  "_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30";
+
+const div = flights.split("+");
+console.log(div);
+
+for (const flight of flights.split("+")) {
+  const [type, from, to, time] = flight.split(";");
+  const output = `${type.replaceAll("_", " ")} from ${from
+    .slice(0, 3)
+    .toUpperCase()} ${to.slice(0, 3).toUpperCase()} (${time.replace(
+    ":",
+    "h"
+  )})`;
+  console.log(output);
+}
