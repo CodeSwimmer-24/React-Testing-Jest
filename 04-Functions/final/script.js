@@ -156,3 +156,56 @@ document.querySelector('.poll').addEventListener('click', () => {
 (function () {
   console.log('This will never call again');
 })();
+
+// CLOSURES
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+g();
+f();
+
+const boadingPass = (n, wait) => {
+  const group = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are boading all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${group} passengers`);
+  }, wait * 1000);
+  console.log(`We will start boading in  ${wait} sec`);
+};
+
+boadingPass(180, 3);
+
+// Coding challange 2
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  const blue = () => (header.style.color = 'blue');
+  document.querySelector('body').addEventListener('click', blue);
+})();
+
+const colorChange = () => {};
+
+colorChange();
