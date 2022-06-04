@@ -129,30 +129,43 @@ calDisplayBalance(account1.movements);
 
 // acc = Accumulator
 
-const balance = movement.reduce((acc, cur, i, arr) => {
-  console.log(`${i} : ${acc}`);
-  return acc + cur;
-});
+// const balance = movement.reduce((acc, cur, i, arr) => {
+//   console.log(`${i} : ${acc}`);
+//   return acc + cur;
+// });
 
-const max = movement.reduce((acc, max) => {
-  if (acc > max) {
-    return acc;
-  } else {
-    return max;
-  }
-}, movement[0]);
+// const max = movement.reduce((acc, max) => {
+//   if (acc > max) {
+//     return acc;
+//   } else {
+//     return max;
+//   }
+// }, movement[0]);
 
-console.log(max);
+// console.log(max);
 
 // let sum = 0;
 // // console.log(mov);
 // for (const mov of movement) sum += mov;
 // console.log(sum);
 
-const calcAvarageHumanAge = (dogsAge) => {
-  console.log(dogsAge);
-  const humanAge = dogsAge.map((age) => (age <= 2 ? 2 * age : 16 + age * 4));
-  console.log(humanAge);
-};
+// const calcAvarageHumanAge = (dogsAge) => {
+//   console.log(dogsAge);
+//   const humanAge = dogsAge.map((age) => (age <= 2 ? 2 * age : 16 + age * 4));
+//   console.log(humanAge);
+//   const adults = humanAge.filter((age) => age > 18);
+//   console.log(adults);
+//   const average = adults.reduce((a, b) => a + b, 0) / adults.length;
+//   console.log(average);
+// };
 
-calcAvarageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// calcAvarageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+const eurToUsd = 1.1;
+
+const totalDepositeToUsd = movement
+  .filter((mov) => mov > 0)
+  .map((mov) => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositeToUsd);
