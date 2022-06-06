@@ -75,6 +75,30 @@ const calDisplayBalance = (movement) => {
 };
 
 calDisplayBalance(account1.movements);
+
+const calDisplaySummary = (movement) => {
+  const income = movement
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  document.querySelector(".summary__value--in").textContent = `${income} €`;
+  const outcome = movement
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  document.querySelector(".summary__value--out").textContent = `${Math.abs(
+    outcome
+  )} €`;
+
+  const interest = movement
+    .filter((mov) => mov > 0)
+    .map((mov) => (mov * 1.2) / 100)
+    .reduce((acc, mov) => acc + mov, 0);
+  document.querySelector(".summary__value--interest").textContent = `${Math.abs(
+    interest
+  )} €`;
+};
+
+calDisplaySummary(account1.movements);
+
 // ---------Coding Chalange--------
 
 // const julia = [3, 5, 2, 12, 7];
@@ -161,11 +185,19 @@ calDisplayBalance(account1.movements);
 
 // calcAvarageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 
-const eurToUsd = 1.1;
+// const eurToUsd = 1.1;
 
-const totalDepositeToUsd = movement
-  .filter((mov) => mov > 0)
-  .map((mov) => mov * eurToUsd)
-  .reduce((acc, mov) => acc + mov, 0);
+// PIPELINE METHOD
+// const totalDepositeToUsd = movement
+//   .filter((mov) => mov > 0)
+//   .map((mov) => mov * eurToUsd)
+//   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(totalDepositeToUsd);
+// console.log(totalDepositeToUsd);
+
+// const chain = (dogsAge) => {
+//   const small = dogsAge.filter((age) => (age <= 2 ? age * 2 : 16 + age * 4));
+//   console.log(small);
+// };
+
+// chain([5, 2, 4, 1, 15, 8, 3]);
