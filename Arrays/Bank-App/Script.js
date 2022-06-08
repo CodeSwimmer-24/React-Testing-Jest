@@ -99,6 +99,29 @@ const calDisplaySummary = (movement) => {
 
 calDisplaySummary(account1.movements);
 
+const calcuDisplaySummary = (movement) => {
+  const income = movement
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  document.querySelector(".summary__value--in").textContent = `${income} €`;
+  const outcome = movement
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  document.querySelector(".summary__value--out").textContent = `${Math.abs(
+    outcome
+  )} €`;
+
+  const interest = movement
+    .filter((mov) => mov > 0)
+    .map((mov) => (mov * 1.2) / 100)
+    .reduce((acc, mov) => acc + mov, 0);
+  document.querySelector(".summary__value--interest").textContent = `${Math.abs(
+    interest
+  )} €`;
+};
+
+calcuDisplaySummary(account2.movements);
+
 // ---------Coding Chalange--------
 
 // const julia = [3, 5, 2, 12, 7];
