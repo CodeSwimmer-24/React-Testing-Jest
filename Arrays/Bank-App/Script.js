@@ -224,3 +224,22 @@ calcuDisplaySummary(account2.movements);
 // };
 
 // chain([5, 2, 4, 1, 15, 8, 3]);
+
+// calcAvarageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+// const eurToUsd = 1.1;
+
+// PIPELINE METHOD
+// const totalDepositeToUsd = movement
+//   .filter((mov) => mov > 0)
+//   .map((mov) => mov * eurToUsd)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(totalDepositeToUsd);
+
+// const chain = (dogsAge) => {
+//   const small = dogsAge.filter((age) => (age <= 2 ? age * 2 : 16 + age * 4));
+//   console.log(small);
+// };
+
+// chain([5, 2, 4, 1, 15, 8, 3]);
