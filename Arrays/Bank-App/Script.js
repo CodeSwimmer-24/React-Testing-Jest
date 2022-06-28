@@ -61,10 +61,8 @@ const createUserName = (acc) => {
       .split(" ")
       .map((word) => word[0])
       .join("");
-    // console.log(userName);
   }
 };
-
 createUserName(accounts);
 console.log(accounts);
 
@@ -99,28 +97,32 @@ const calDisplaySummary = (movement) => {
 
 calDisplaySummary(account1.movements);
 
-const calcuDisplaySummary = (movement) => {
-  const income = movement
-    .filter((mov) => mov > 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  document.querySelector(".summary__value--in").textContent = `${income} €`;
-  const outcome = movement
-    .filter((mov) => mov < 0)
-    .reduce((acc, mov) => acc + mov, 0);
-  document.querySelector(".summary__value--out").textContent = `${Math.abs(
-    outcome
-  )} €`;
+// LOGIN
 
-  const interest = movement
-    .filter((mov) => mov > 0)
-    .map((mov) => (mov * 1.2) / 100)
-    .reduce((acc, mov) => acc + mov, 0);
-  document.querySelector(".summary__value--interest").textContent = `${Math.abs(
-    interest
-  )} €`;
-};
+document.querySelector(".app").style.opacity = 0;
 
-calcuDisplaySummary(account2.movements);
+const loginBtn = document.querySelector(".login__btn");
+const inputLoginUserName = document.querySelector(".login__input--user");
+const inputLoginUserPin = document.querySelector(".login__input--pin");
+
+let currentAccount;
+
+loginBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUserName.value
+  );
+  console.log(currentAccount, "hhhh");
+  if (currentAccount.pin === Number(inputLoginUserPin.value)) {
+    document.querySelector(".app").style.opacity = 100;
+    document.querySelector(".welcome").textContent = `Welcome back ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+  } else {
+    alert("WRONG PIN");
+  }
+});
 
 // ---------Coding Chalange--------
 
@@ -229,17 +231,11 @@ calcuDisplaySummary(account2.movements);
 
 // const eurToUsd = 1.1;
 
-// PIPELINE METHOD
-// const totalDepositeToUsd = movement
-//   .filter((mov) => mov > 0)
-//   .map((mov) => mov * eurToUsd)
-//   .reduce((acc, mov) => acc + mov, 0);
+// FIND METHOD
 
-// console.log(totalDepositeToUsd);
+// const firstWithdrawl = movement.find((mov) => mov < 0);
 
-// const chain = (dogsAge) => {
-//   const small = dogsAge.filter((age) => (age <= 2 ? age * 2 : 16 + age * 4));
-//   console.log(small);
-// };
+// console.log(firstWithdrawl);
 
-// chain([5, 2, 4, 1, 15, 8, 3]);
+// const account = accounts.find((acc) => acc.owner === "Jessica Davis");
+// console.log(account);
