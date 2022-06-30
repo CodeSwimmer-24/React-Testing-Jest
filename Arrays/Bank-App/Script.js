@@ -55,7 +55,7 @@ const displayMovements = (movement, sort = false) => {
 
 const createUserName = (acc) => {
   for (const user of acc) {
-    console.log(user.owner);
+    // console.log(user.owner);
     user.username = user.owner
       .toLowerCase()
       .split(" ")
@@ -64,7 +64,7 @@ const createUserName = (acc) => {
   }
 };
 createUserName(accounts);
-console.log(accounts);
+// console.log(accounts);
 
 const calDisplayBalance = (acc) => {
   const balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
@@ -395,13 +395,64 @@ sorting.addEventListener("click", (e) => {
 
 // To calculate deposits and withdrawls
 
-const sums = accounts
-  .flatMap((acc) => acc.movements)
-  .reduce(
-    (sums, cal) => {
-      cal > 0 ? (sums.deposit += cal) : (sums.withdrawal += cal);
-      return sums;
-    },
-    { deposit: 0, withdrawal: 0 }
+// const sums = accounts
+//   .flatMap((acc) => acc.movements)
+//   .reduce(
+//     (sums, cal) => {
+//       cal > 0 ? (sums.deposit += cal) : (sums.withdrawal += cal);
+//       return sums;
+//     },
+//     { deposit: 0, withdrawal: 0 }
+//   );
+// console.log(sums);
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+  { weight: 13, curFood: 275, owners: ["Sarah", "Johns"] },
+  { weight: 32, curFood: 340, owners: ["Michael"] },
+];
+
+// Eating too much = curFood > recFood
+// Eating too little = curFood < recFood
+// Eating good = curFood =< curFood % 10 && curFood >= curFood % 10;
+
+dogs.map((items) => {
+  items.recFood = items.weight ** 0.75 * 28;
+});
+
+dogs.map((items) => {
+  if (items.owners.find((own) => own === "Sarah")) {
+    console.log(
+      `Sarah's dog is eating too ${
+        items.curFood > items.recFood ? "much" : "less"
+      } `
+    );
+  }
+});
+
+// **3**
+const eatTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recFood)
+  .flatMap((dog) => dog.owners);
+console.log(eatTooMuch);
+
+const eatTooLess = dogs
+  .filter((dog) => dog.curFood < dog.recFood)
+  .flatMap((dog) => dog.owners);
+console.log(eatTooLess);
+
+// **4**
+console.log(`${eatTooMuch.join(" and ")} dogs eat too much`);
+
+// **5**
+
+dogs.map((items) => {
+  console.log(
+    items.curFood > items.recFood * 0.9 && items.curFood < items.recFood * 1.1
+      ? items.owners
+      : false
   );
-console.log(sums);
+});
+
+const dogsCopy = dogs.slice();
+console.log(dogsCopy);
