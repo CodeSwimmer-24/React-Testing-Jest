@@ -33,12 +33,29 @@ console.log(accounts);
 
 const movement = account1.movements;
 
+// ----Logout Timer ------
+
+const labelTimer = document.querySelector(".timer");
+const startLogoutTimer = () => {
+  let time = 1000;
+  const timer = setInterval(() => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${min}:${sec}`;
+    time--;
+    if (time === 0) {
+      clearInterval(timer);
+      document.querySelector(".app").style.opacity = 0;
+    }
+  }, 1000);
+};
+
 const displayMovements = (movement, sort = false) => {
   const movs = sort ? movement.slice().sort((a, b) => b - a) : movement;
 
   document.querySelector(".movements").innerHTML = "";
   for (const [i, mov] of movs.entries()) {
-    const type = mov > 0 ? "deposit" : "withdrawal";
+    const type = mov > 0 ? "deposit" : "";
 
     const html = `
     <div class="movements__row">
@@ -52,6 +69,10 @@ const displayMovements = (movement, sort = false) => {
     document.querySelector(".movements").insertAdjacentHTML("afterbegin", html);
   }
 };
+``;
+const now = new Date();
+document.querySelector(".date").textContent =
+  `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`.padStart(2, 0);
 
 const createUserName = (acc) => {
   for (const user of acc) {
@@ -68,9 +89,15 @@ createUserName(accounts);
 
 const calDisplayBalance = (acc) => {
   const balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+
+  const formatedBalance = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(acc);
+
   document.querySelector(".balance__value").textContent = `${balance.toFixed(
-    0
-  )} EUR`;
+    2
+  )} ${formatedBalance}`;
   acc.balance = balance;
   console.log(balance);
 };
@@ -125,6 +152,7 @@ loginBtn.addEventListener("click", (e) => {
   inputLoginUserName.value = "";
   inputLoginUserPin.value = "";
 
+  startLogoutTimer();
   // DISPLAY MOVEMENTS
   displayMovements(currentAccount.movements);
 
@@ -313,13 +341,67 @@ sorting.addEventListener("click", (e) => {
 
 // console.log(new Date(3 * 24 * 60 * 60 * 1000));
 
-const future = new Date(2037, 10, 19, 15, 23);
-console.log(future);
-console.log(future.getFullYear());
-console.log(future.getMonth());
-console.log(future.getDay());
-console.log(future.getDate());
-console.log(future.getHours());
-console.log(future.getMinutes());
-console.log(future.toISOString());
-console.log(future.getTime());
+// const future = new Date(2037, 10, 19, 15, 23);
+// console.log(future);
+// console.log(future.getFullYear());
+// console.log(future.getMonth());
+// console.log(future.getDay());
+// console.log(future.getDate());
+// console.log(future.getHours());
+// console.log(future.getMinutes());
+// console.log(future.toISOString());
+// console.log(future.getTime());
+
+// const calcDaysPassed = (date1, date2) =>
+//   (date2 - date1) / (1000 * 60 * 60 * 24);
+// const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
+
+// console.log(days1);
+
+// _____INTERNATIONALIZATION DATES__________
+// const inter = new Date();
+// const options = {
+//   hour: "numeric",
+//   minute: "numeric",
+//   day: "numeric",
+//   month: "long",
+//   year: "numeric",
+//   weekday: "long",
+// };
+// console.log(new Intl.DateTimeFormat("en-us", options).format(inter));
+
+// _____INTERNATIONALIZATION NUMBERS__________
+
+// const num = 234567.345;
+
+// const options = {
+//   style: "unit",
+//   unit: "mile-per-hour",
+// };
+
+// console.log("US:", new Intl.NumberFormat("en-US", options).format(num));
+// console.log("Germany", new Intl.NumberFormat("de-DE", options).format(num));
+// console.log("Seria:", new Intl.NumberFormat("ar-SY", options).format(num));
+
+// -------TIMERS---------
+
+// setTimeout(() => console.log("Here's your Pizza"), 3000, "");
+
+// const img = ["oliv", "spinach"];
+
+// const pizzaTimer = setTimeout(
+//   (img1, img2) => console.log(`Here's your Pizza ${img1} ${img2}`),
+//   3000,
+//   ...img
+// );
+
+// if (img.includes("spinach")) clearTimeout(pizzaTimer);
+
+// console.log("Waiting...");
+
+// ------SET TIME OUT------
+
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
