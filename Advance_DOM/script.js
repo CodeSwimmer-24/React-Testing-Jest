@@ -145,11 +145,28 @@ nav.addEventListener("mouseout", (e) => {
 
 // -----Sticky Navbar------
 
-const initialCoard = section1.getBoundingClientRect();
-window.addEventListener("scroll", function () {
-  if (window.screenY > initialCoard.top) nav.classList.add("sticky");
+const stickyNav = function (ent) {
+  const [entry] = ent;
+  console.log(entry);
+
+  if (!entry.isIntersecting) nav.classList.add("sticky");
   else nav.classList.remove("sticky");
+};
+
+const headerobserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: "-90px",
 });
+
+headerobserver.observe(header);
+
+// const initialCoard = section1.getBoundingClientRect();
+// console.log(initialCoard);
+// window.addEventListener("scroll", function () {
+//   if (window.screenY > initialCoard.top) nav.classList.add("sticky");
+//   else nav.classList.remove("sticky");
+// });
 // console.log("LINK", e.target, e.currentTarget);
 // console.log(e.currentTarget === this);
 
