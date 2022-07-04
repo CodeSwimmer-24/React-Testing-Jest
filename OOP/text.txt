@@ -1,0 +1,60 @@
+Object Oriented Programming (OOP)
+
+1> we define a class 
+class{
+    name
+    email
+    password
+login(){
+    //Login login
+ }
+}
+
+    |
+    |
+    |
+    |
+    ⬇️
+
+{
+    user:'john'
+    email:'sss@hhh.com'
+    password:'12344'
+
+    login(){
+    //Login login
+ }
+}
+
+----------------------------------------------------
+
+2> Principles for OOP
+
+* Abstraction ==> To hide the details which don't matters to a user means to hide some back details from main user which he not cares for. 
+
+* Encapsulation ==>  Keeping properties and method private inside the class which is not access able from outside class. 
+
+* Inheritance  ==> If we have too class with some same properities and we don't want to duplicate the code then we just inherit the parent class in child class.  
+
+* Polymorphism ==> A child class can overwrite a method it inherit from a parent class. 
+
+---------------------------------------------------
+
+3 > OOP in Java script
+
+       Prototype 
+          ⬆
+        Objects
+
+Prototype Inheritance ===>  The Prototype contains method(behavior) that are accessible to all object linked to that Prototype.
+
+#### In Js there are three method to implement OOp ####
+
+* Constructor Function ---> Technique to create object from   a function. Like Array, Maps, Sets etc.
+
+* ES6 Classes ---> Just modern syntax to do the same stuff.
+
+* Object.create ---> Same but easy 
+
+
+
