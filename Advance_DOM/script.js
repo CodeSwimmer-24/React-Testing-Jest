@@ -96,7 +96,7 @@ document.querySelector(".nav__links").addEventListener("click", (e) => {
   }
 });
 
-// ------Tabs Components ------
+// ------Toggle Tabs Components ------
 
 const tabs = document.querySelectorAll(".operations__tab");
 const tabsContainer = document.querySelector(".operations__tab-container");
@@ -160,6 +160,126 @@ const headerobserver = new IntersectionObserver(stickyNav, {
 });
 
 headerobserver.observe(header);
+
+// -----Scroll Animation------
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove("section--hidden");
+  // observer.unobserve(entry.target);
+};
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSection.forEach((section) => {
+  sectionObserver.observe(section);
+  section.classList.add("section--hidden");
+});
+
+// ------LAZY LOADING------
+
+const imageTargets = document.querySelectorAll("img[data-src]");
+
+const loadImg = (ent, observer) => {
+  const [entry] = ent;
+  if (!entry.isIntersecting) return;
+  entry.target.src = entry.target.dataset.src;
+  entry.target.addEventListener("load", () => {
+    entry.target.classList.remove("lazy-img");
+  });
+  observer.unobserve(entry.target);
+};
+
+const imageObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+});
+
+imageTargets.forEach((img) => {
+  imageObserver.observe(img);
+});
+
+// -----SLIDING --------
+
+const slides = document.querySelectorAll(".slide");
+const btnLeft = document.querySelector(".slider__btn--left");
+const btnRight = document.querySelector(".slider__btn--right");
+const dotContainer = document.querySelector(".dots");
+
+let currentSlide = 0;
+const maxSlide = slides.length;
+
+const goToslide = (slide) => {
+  console.log(slide);
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+goToslide(0);
+
+const activeSlide = (slide) => {
+  document
+    .querySelectorAll(".dots__dot")
+    .forEach((dot) => dot.classList.remove("dots__dot--active"));
+
+  document
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add("dots__dot--active");
+};
+// activeSlide(0);
+// Next BTN
+const nextSlide = () => {
+  if (currentSlide === maxSlide - 1) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+  goToslide(currentSlide);
+  activeSlide(currentSlide);
+};
+
+const prevSlide = () => {
+  if (currentSlide === 0) {
+    currentSlide = maxSlide - 1;
+  } else {
+    currentSlide--;
+  }
+  goToslide(currentSlide);
+  activeSlide(currentSlide);
+};
+
+btnRight.addEventListener("click", nextSlide);
+btnLeft.addEventListener("click", prevSlide);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") {
+    prevSlide();
+  } else {
+    e.key === "ArrowRight" && nextSlide();
+  }
+});
+
+const createDots = () => {
+  slides.forEach((_, i) => {
+    dotContainer.insertAdjacentHTML(
+      "beforeend",
+      `<button class='dots__dot' data-slide="${i}"></button>`
+    );
+  });
+};
+
+createDots();
+
+dotContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("dots__dot")) {
+    const { slide } = e.target.dataset;
+    goToslide(slide);
+    activeSlide(slide);
+  }
+});
 
 // const initialCoard = section1.getBoundingClientRect();
 // console.log(initialCoard);
@@ -277,3 +397,19 @@ headerobserver.observe(header);
 // logo.classList.remove("class1", "class2");
 // logo.classList.toggle("class1", "class2");
 // logo.classList.contains("class1", "class2");
+
+//------LIFE CYCLE------
+
+// document.addEventListener("DOMContentLoaded", (e) => {
+//   console.log("HTML passed and DOM tree built");
+// });
+
+// window.addEventListener("load", (e) => {
+//   console.log("page fully loaded", e);
+// });
+
+// window.addEventListener("beforeunload", (e) => {
+//   e.preventDefault();
+//   console.log("page fully loaded", e);
+//   e.returnValue = "";
+// });
