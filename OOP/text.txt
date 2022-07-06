@@ -14,7 +14,7 @@ login(){
     |
     |
     |
-    ⬇️
+    ⬇
 
 {
     user:'john'
@@ -56,5 +56,21 @@ Prototype Inheritance ===>  The Prototype contains method(behavior) that are acc
 
 * Object.create ---> Same but easy 
 
+----------------------------------------------------
+
+4 > 
+
+* Classes are not hoisted, its means we cant use class before it was been declared. 
+
+* Class are First-class citizen, means we can pass and return them from functions.
+
+* Class are executed in strict modern
 
 
+5 > Instant method and Static method
+
+6 > In Encapsulation there are 4 methods
+    * private Fields
+    * Public Fields
+    * Public methods
+    * private methods
