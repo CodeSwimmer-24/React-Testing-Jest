@@ -1,0 +1,15 @@
+//--------------------------------//
+
+  User Stories --->  Features -----> FlowChats ------> Architecture
+
+1. USER STORY 
+   -> Description of the application's functionality from the user's perspective. 
+   [Common Format] => Type - Admin, user
+                      Action - What 
+                      Benefit - Why 
+
+     * A user i want to log my running workout with location, distance time and place steps/min.              
+     * As a user i want to see all my workouts at a glance, so I can easily track my progress time.
+     * And all thing User Wants
+
+2.      
