@@ -1,0 +1,10 @@
+
+
+Promise -> An object that is used as a placeholder for the future result of an asynchronous operations 
+
+Promise -> A container for an asynchronous delivered values
+
+
+Q.) Why promise is better than callback
+
+a.) Because we no longer need to reply on events and callback passed into asynchronous functions to handle asynchronous result

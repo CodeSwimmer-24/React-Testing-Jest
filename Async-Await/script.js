@@ -29,31 +29,50 @@ const renderCountry = (data, className = "") => {
   countriesContainer.style.opacity = 1;
 };
 
-const allCountrieNeighbour = (countries) => {
-  const request = new XMLHttpRequest();
-  request.open("GET", `https://restcountries.com/v2/name/${countries}`);
-  request.send();
+// const allCountrieNeighbour = (countries) => {
+//   const request = new XMLHttpRequest();
+//   request.open("GET", `https://restcountries.com/v2/name/${countries}`);
+//   request.send();
 
-  request.addEventListener("load", function () {
-    const [data] = JSON.parse(this.responseText);
-    console.log(data);
-    renderCountry(data);
+//   request.addEventListener("load", function () {
+//     const [data] = JSON.parse(this.responseText);
+//     console.log(data);
+//     renderCountry(data);
 
-    // Get nebour country
-    const [neighbour] = data.borders;
+//     // Get nebour country
+//     const [neighbour] = data.borders;
 
-    if (!neighbour) return;
+//     if (!neighbour) return;
 
-    const request2 = new XMLHttpRequest();
-    request2.open("GET", `https://restcountries.com/v2/alpha/${neighbour}`);
-    request2.send();
-    request2.addEventListener("load", function () {
-      const data2 = JSON.parse(this.responseText);
-      console.log(data2);
-      renderCountry(data2, "neighbour");
+//     const request2 = new XMLHttpRequest();
+//     request2.open("GET", `https://restcountries.com/v2/alpha/${neighbour}`);
+//     request2.send();
+//     request2.addEventListener("load", function () {
+//       const data2 = JSON.parse(this.responseText);
+//       console.log(data2);
+//       renderCountry(data2, "neighbour");
+//     });
+//   });
+// };
+
+// allCountrieNeighbour("India");
+// allCountrieNeighbour("Usa");
+
+// NEW AJAX CALL
+
+const req = fetch("https://restcountries.com/v2/name/India");
+console.log(req);
+
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      renderCountry(data[0]);
     });
-  });
 };
 
-allCountrieNeighbour("Pakistan");
-allCountrieNeighbour("Usa");
+getCountryData("India");
