@@ -62,12 +62,12 @@ const renderCountry = (data, className = "") => {
 
 // NEW AJAX CALL
 
-// const getJson = (url, error) => {
-//   return fetch(url).then((response) => {
-//     if (!response.ok) throw new Error(error);
-//     return response.json();
-//   });
-// };
+const getJson = (url, error) => {
+  return fetch(url).then((response) => {
+    if (!response.ok) throw new Error(error);
+    return response.json();
+  });
+};
 
 // const req = fetch("https://restcountries.com/v2/name/India");
 // console.log(req);
@@ -267,21 +267,94 @@ const renderCountry = (data, className = "") => {
 
 // ------------------------Async & Await ------------------------------------- //
 
-const whereIAm = async (country) => {
-  const res = await fetch(`https://restcountries.com/v2/name/${country}`);
-  const data = await res.json();
-  renderCountry(data[0]);
-  console.log(data);
+// const whereIAm = async (country) => {
+//   const res = await fetch(`https://restcountries.com/v2/name/${country}`);
+//   const data = await res.json();
+//   renderCountry(data[0]);
+//   //   console.log(data[0].name);
+//   return `You are in ${data[0].name}`;
+// };
+
+// // whereIAm("Pakistan");
+
+// whereIAm().then((city) => console.log(city));
+
+// // ------try, catch
+
+// try {
+//   let y = 1;
+//   const x = 2;
+//   x = 3;
+// } catch (err) {
+//   alert(err.message);
+// }
+
+// const getThreeCountry = async function (c1, c2, c3) {
+//   try {
+//     // const [data1] = await getJson(`https://restcountries.com/v2/name/${c1}`);
+//     // const [data2] = await getJson(`https://restcountries.com/v2/name/${c2}`);
+//     // const [data3] = await getJson(`https://restcountries.com/v2/name/${c3}`);
+
+//     const data = await Promise.all([
+//       getJson(`https://restcountries.com/v2/name/${c1}`),
+//       getJson(`https://restcountries.com/v2/name/${c2}`),
+//       getJson(`https://restcountries.com/v2/name/${c3}`),
+//     ]);
+
+//     console.log(data.map((d) => d[0].capital));
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// getThreeCountry("Pakistan", "India", "Afganistan");
+
+// ====== Promise.rase =====
+
+// (async () => {
+//   const res = await Promise.race([
+//     getJson(`https://restcountries.com/v2/name/Afganistan`),
+//     getJson(`https://restcountries.com/v2/name/Pakistan`),
+//     getJson(`https://restcountries.com/v2/name/India`),
+//   ]);
+//   console.log(res[0]);
+// })();
+
+// Coding 3
+
+const imgContainer = document.querySelector(".images");
+
+const wait = (sec) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, sec * 1000);
+  });
 };
 
-whereIAm("India");
+const loadImage = async () => {
+  let currentImage;
+  try {
+    let img = await currentImage(
+      "https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q="
+    );
+    console.log("Image 1");
+    await wait(2);
+    img.style.display = "none";
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-// ------try, catch
+// loadImage();
 
-try {
-  let y = 1;
-  const x = 2;
-  x = 3;
-} catch (err) {
-  alert(err.message);
-}
+const loadAll = async function (imgArr) {
+  try {
+    const img = imgArr.map(async (img) => await console.log("Image 1 "));
+
+    const imgsEl = await Promise.all(img);
+    console.log(imgsEl);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+loadAll(["image1", "image2"]);
