@@ -1,0 +1,22 @@
+
+
+BABEL -> It's use to transfer modern code in Es5 so that it can also run in old brawsers. 
+
+Command Line
+
+1. ls, dir => To see the folders 
+
+2. cd => To change directory 
+   cd..
+   cd name
+
+3. mkdir -> create new folders
+
+4. touch -> create new file 
+
+5. rm -> to delete file 
+
+6. mv ->  to move the file
+
+7. rmdir -> to remove a folders
+
