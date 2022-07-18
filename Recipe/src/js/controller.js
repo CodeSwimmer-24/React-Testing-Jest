@@ -5,6 +5,7 @@ import * as model from "./model.js";
 import recipeView from "./view/recipeView.js";
 import searchView from "./view/searchView.js";
 import resultView from "./view/resultView.js";
+import paginationView from "./view/paginationView.js";
 
 const controlRecipe = async () => {
   try {
@@ -34,16 +35,24 @@ const controlSearchResult = async () => {
     if (!query) return;
 
     await model.loadSearchResult(query);
-    console.log(model.state.search.result);
 
-    resultView.render(model.state.search.result);
+    resultView.render(model.getPagenation());
+
+    paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }
 };
 
+const controlPagination = (goToPage) => {
+  resultView.render(model.getPagenation(goToPage));
+
+  paginationView.render(model.state.search);
+};
+
 const select = function () {
   recipeView.addHandlerRender(controlRecipe);
   searchView.addHandlerSearch(controlSearchResult);
+  paginationView.addHandleClick(controlPagination);
 };
 select();
