@@ -575,8 +575,14 @@ const controlPagination = (goToPage)=>{
     (0, _resultViewJsDefault.default).render(_modelJs.getPagenation(goToPage));
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
+const controllerServings = ()=>{
+    // Update the recipe servings (in state)
+    _modelJs.updateServings(8);
+    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+};
 const select = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipe);
+    (0, _recipeViewJsDefault.default).addHandelerUpdateServings(controllerServings);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResult);
     (0, _paginationViewJsDefault.default).addHandleClick(controlPagination);
 };
@@ -2281,6 +2287,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 parcelHelpers.export(exports, "loadSearchResult", ()=>loadSearchResult);
 parcelHelpers.export(exports, "getPagenation", ()=>getPagenation);
+parcelHelpers.export(exports, "updateServings", ()=>updateServings);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _config = require("./config");
 var _helpers = require("./helpers");
@@ -2336,6 +2343,12 @@ const getPagenation = (page = state.search.page)=>{
     const end = page * state.search.resultPerPage; //9
     return state.search.result.slice(start, end);
 };
+const updateServings = (newServings)=>{
+    state.recipe.ingredients.forEach((ing)=>{
+        ing.quantity = ing.quantity * newServings / state.recipe.servings;
+    });
+    state.recipe.servings = newServings;
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ","./config":"k5Hzs","./helpers":"hGI1E"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2388,6 +2401,14 @@ class RecipeView extends (0, _viewDefault.default) {
             "hashchange",
             "load"
         ].forEach((e)=>window.addEventListener(e, handler));
+    }
+    addHandelerUpdateServings(handler) {
+        this._parentElement.addEventListener("click", (e)=>{
+            const btn = e.target.closest("btn--tiny");
+            if (!btn) return;
+            console.log(btn);
+            handler();
+        });
     }
     _generateMarkup() {
         return `
